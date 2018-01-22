@@ -22,7 +22,7 @@ Actors: User, User Made Level Section, main menu
     2.a.b retry- retries connecting to database, attempts case 2 again
 3. Level is deleted from the database
 
-### For the below, consult diagram in wiki section -----
+### For the below, consult diagram in wiki section 8.3
 
 ## User wants to Add Object to the level
 Preconditions: user is in editor screen
