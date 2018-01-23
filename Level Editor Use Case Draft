@@ -20,7 +20,7 @@ Actors: User, User Made Level Section, main menu
   2.a Connection fails, Prompts user to take one of two actions
     2.a.a cancel - returns user to main menu
     2.a.b retry- retries connecting to database, attempts case 2 again
-3. Level is deleted from the database
+3. Level with correspondind id is deleted from the database
 
 ### For the below, consult diagram in wiki section 8.3
 
@@ -107,4 +107,40 @@ Actors: User, Database, Level Editor, Level Editor Menu, Main Menu
  3. Exits back to User Made Level Select Menu
  4. User presses another return button, returning to the main menu.
  
+ 
+ --------------------
+ 
+## User wants to access the leader board page while logged in
+Preconditions: database is running, User in in main menu
+Postconditions: None
+Actors: User, Database, Main Menu, Leaderboard page
+1. User presses the leader board button
+2. New page opens, connection is tried to database
+   2.a Connection is unsucessful- New page tells of error
+3. Default Grand Leaderboard is loaded from database on the leaderboard page.
+
+## User wants to search for a level's leaderboard
+
+Preconditions: database is running
+Postconditions: None
+Actors: User, Database, Leader Board Page
+1. User presses a select menu, which is located next to a textfeild. This menu will have choices of level name, level id, and creator name
+2. User enters Information
+3. Search button is pressed, a query to the database is done
+   3.a Creator was selected in part 1 - Search public level database for all levels under creator
+   3.b Level Name was selected in part 1 - Search for Level Names that are exactly what the user entered
+   3.c ID was selected in part 1 - Search for an exact match for level Id
+   3.d Unable to connect to database - Inform user that it is unable to connect to the database
+4. User selects desired level
+  4.a If desired level only has one result, skip to step 5 without user input
+5. Level's leaderboard is retreived, and displayed on screen
+
+## User wants to try the veiwed level
+  Preconditions: database is running, a sucussful login was made
+  Postconditions: None
+  Actors: User, Leaderboard page, Database, Game page
+1. User presses the play button on the level's page
+2. User Connects to database
+  2.a User is unable to connect to database - Prompt user that there has been an error, allow user to retry by doing step 1 again.
+3. Game Page is opened with the level loaded, ready to play
   
