@@ -1,0 +1,146 @@
+## User wishes to acess the editor
+Preconditions: user is in menu screen, database is running
+Postconditions: None
+Actors: User, Main Menu, User Made Level Section, Level Editor
+1. User selects the level editor button from main menu
+  1.a user is in offline mode, brought directly to 4 with new level
+2. Connection is made to database
+  2.a Connection fails, Prompts user to take one of two actions
+    2.a.a continue - Go to 4 with new level
+    2.a.b retry- retries connecting to database
+3. User selects a saved level, or selects new level
+4. Editor is oppened with the desired or default level
+
+## User wishes to delete a previously worked on level
+Preconditions: user is in menu screen, database is running
+Postconditions: None
+Actors: User, User Made Level Section, main menu
+1. User presses the delete Icon
+2. Connection is made to database
+  2.a Connection fails, Prompts user to take one of two actions
+    2.a.a cancel - returns user to main menu
+    2.a.b retry- retries connecting to database, attempts case 2 again
+3. Level with correspondind id is deleted from the database
+
+### For the below, consult diagram in wiki section 8.3
+
+## User wants to Add Object to the level
+Preconditions: user is in editor screen
+Postconditions: None
+Actors: User, Level Editor
+1. User selects category of desired object (buttons A1 - A3), which will update the side menu (C1) with desired objects
+2. User selects desired object, which updates the object that will be placed on click to the corresponding object
+3. User clicks on Level editor canvas, updating desired square to said object
+   3.a Desired Location already has an object (not empty)- Object will be overiden/ replaced with the current object.
+   3.b No object was selected - Will place a default object (block), unless object is already in desired location
+----note: Upon sucessful step 3, will set "ready to publish" flag to false
+
+## User attempts to change objectives of levels
+Preconditions: user is in editor screen
+Postconditions: None
+Actors: User, Level Editor
+1. User presses objectives button (A4)
+2. Center of screen (C2) becomes Objectives menu
+3. User adds/drops objectives
+  3.a User attempts to add an already present objective - updates objective
+  3.b User attempts to interact with anything that is not the screen - nothing happens
+4. User selects the close button
+5. Menu is closed, changes are saved.
+
+## User attempts to Save Level (Not Offline)
+Preconditions: The database is running, user is in editor screen
+Postconditions: None
+Actors: User, Database, Level Editor
+1.Game connects to the Database
+  1.a Connection is unsucessful - Prompt User to take action in prompt area (C2). Actions will be retry, save to local, and cancel
+    1.a.a Retry is selected - Repeats Case 1
+    1.a.b Save to Local is selected - file browser opens, saves to desired location as textfile
+    1.a.c Cancel is selected - Prompt closes, no furthur action is taken
+2. Checks for level ID
+   2.a Level ID Found- Level is saved
+   2.b Level ID not Found
+      2.b.1 Prompt user to name level in (C2) area
+      2.b.2 Game Connects to database
+        2.b.2.1 Connection is unsucessful, prompt user to do one of 2 actions
+          2.b.2.1.a Retry is selected - Repeats Case 1
+          2.b.2.1.b Cancel is selected - Prompt closes, no furthur action is taken
+      2.b.3 Level is saved to database
+
+## User attempts to Publish Level (Not Offline)
+Preconditions: The database is running, user is in editor screen
+Postconditions: None
+Actors: User, Database, Level Editor
+1. Checks if "ready to publish" flag is True, along with "Has Objective"
+  1.a If "ready to publish" is false - prompts user to complete level in (C2) area
+2. Attempts to Connect to database
+  2.1 If Connection failed - Prompts user to do one of two options
+    2.1.a User selects retry option- repeats case 2
+    2.1.b User selects cancel - prompt closes, no further action is taken
+3. Level is added to database of public levels
+
+## User attempts to test the level
+Preconditions: user is in editor screen
+Postconditions: None
+Actors: User, Level Editor
+1. Play Button is pressed
+  1.a spawn point does not exist - Prompt user of issue
+  1.b more than one spawn point exists - Prompt user of issue
+2. Game enters the play mode
+  2.a Level is beaten- exits back to editor, set "ready to publish" flag to true
+  2.b Level is exited via menu- exits back to editor
+  
+## User attempts to return to main menu (Not Offline)
+Preconditions: user is in editor screen, database is running
+Postconditions: None
+Actors: User, Database, Level Editor, Level Editor Menu, Main Menu
+1. User presses the return to menu button
+2. Prompt appears, prompting the user to save. A few choices are avaliable
+  2.a Continue is selected - Continue to step 3
+  2.b Canel is selected- prompt closes, nothing happens
+  2.c Save is selected
+    2.c.1 Conntects to data base
+    2.c.2 Checks for Level ID
+      2.c.2.a Level ID is not found
+        2.c.2.a.1 User enters Level Name, presses Continue
+        2.c.2.a.2 Level is saved to database via another connection
+      2.c.2.b Level ID is found, level is saved, continue to step 3
+ 3. Exits back to User Made Level Select Menu
+ 4. User presses another return button, returning to the main menu.
+ 
+ 
+ --------------------
+ 
+## User wants to access the leader board page while logged in
+Preconditions: database is running, User in in main menu
+Postconditions: None
+Actors: User, Database, Main Menu, Leaderboard page
+1. User presses the leader board button
+2. New page opens, connection is tried to database
+   2.a Connection is unsucessful- New page tells of error
+3. Default Grand Leaderboard is loaded from database on the leaderboard page.
+
+## User wants to search for a level's leaderboard
+
+Preconditions: database is running
+Postconditions: None
+Actors: User, Database, Leader Board Page
+1. User presses a select menu, which is located next to a textfeild. This menu will have choices of level name, level id, and creator name
+2. User enters Information
+3. Search button is pressed, a query to the database is done
+   3.a Creator was selected in part 1 - Search public level database for all levels under creator
+   3.b Level Name was selected in part 1 - Search for Level Names that are exactly what the user entered
+   3.c ID was selected in part 1 - Search for an exact match for level Id
+   3.d Unable to connect to database - Inform user that it is unable to connect to the database
+4. User selects desired level
+  4.a If desired level only has one result, skip to step 5 without user input
+5. Level's leaderboard is retreived, and displayed on screen
+
+## User wants to try the veiwed level
+  Preconditions: database is running, a sucussful login was made
+  Postconditions: None
+  Actors: User, Leaderboard page, Database, Game page
+1. User presses the play button on the level's page
+2. User Connects to database
+  2.a User is unable to connect to database - Prompt user that there has been an error, allow user to retry by doing step 1 again.
+3. Game Page is opened with the level loaded, ready to play
+  

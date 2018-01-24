@@ -1,10 +1,11 @@
 # Game Design Document
 
 ## 1. Game Overview
-
 ### 1.1. Game Concept / Genre
+Our game is a platforming game with a fantasy medieval theme. It will revolve around solving how to complete each level, as we plan to have different objectives for level completion. These alternative objectives will also be avialable as alternate completions for playermade levels
 ### 1.2. Game Flow Summary – At a high level, how does the game progress?
 ### 1.3. Look and Feel – What is the basic look and feel of the game? What is the visual style?
+We aim to have a fantasy medeival theme; a fantasy theme with magic taking place in a castle/medieval setting. The feel of the game will be more or less a platformer with some critical thinking elements on which doors to open/ which route to take.
 ## 2. Gameplay and Mechanics
 ### 2.1 gameplay
 ####  2.1.1-the player is greeted by the introduction screen which includes a “login” button , a “play” button to start pre-made levels in the game , a “build” button to access the level editor , and an “options” button for configuration
@@ -67,6 +68,14 @@ reader can get an idea of how one looks / plays.
    During the creation of a level, the user can click the play button at anytime to start and test the level after setting the initial player spawn point.
 ## 9. Player Account
 ### 9.1. Player Login / Profile – Stores / displays save games, levels, scores, achievements, etc.
+Players will be able to login via username and password. Username's will be unique. Once logged in, the player will be able to play from where he left off on the main campaign, or play/create user levels.
+A player's profile will include his own levels, his favorited levels, and the amount of unique levels said player has beaten. The number of unique levels comlpeted will be stored on a grand leaderboard. Player's can find other player's profiles by a search, or finding their player id on a leaderboard.
+Levels will have a leaderboard of 10 players, a level rating, the player id of the creator, and the level data.
 ### 9.2. Save Game – Quick Save vs. Save Points vs. Checkpoints
+We aim to have the progress of the main campaign saved on a perlevel basis. We also aim to have checkpoints in these levels, in which players will return to if they die, aswell as reverting the level back to a previous state in which the checkpoint was passed. We aim to be able to save the progress of one level to the database, though starting a level different from the saved level will result in loss of progress.
 ### 9.3. High Scores – Saving high scores / fastest times?
-### 9.4. Achievements – What type of achievements to store? 
+Players will have their "number of user created levels completed" tracked. From the leader board, people can veiw the player profile's of these players, which will include what was mentioned above.
+Another feature that we are looking to implement is the ability to lookup someone's level and to find the fastest completion times. These will show the time the player completed the level along with the player id of the player, sort of like a mini leaderboard for the level. From here, the player can look at the player profile of these players, or look at the profile of the creator.
+### 9.4. Achievements – What type of achievements to store?
+We aim to store the player's main game progress, aswell as a player's count of main level completed. Since levels will have their own leaderboards aswell, players can compete for the fastest time on any user created level. There will also be the grand leaderboard that player's can compete for.
+We also aim to have steam like acheivements, that will also be stored to a player's account. These will be more or less related to the main campaign, but some will be obtainable through/exclusive to player made levels.
