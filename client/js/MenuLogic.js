@@ -1,4 +1,4 @@
-var divList= ['menu1' ,'menu2','menu3','menu4'];
+var divList= ['MainMenu' ,'Login','Create Account','Offline','Play'];
 
 function menuButton(divID) {
     for (i=0;i<divList.length;i++){

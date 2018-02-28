@@ -6,20 +6,39 @@
 <link rel="stylesheet" type="text/css" href="index.css">
 </head>
 <body>
-<div id='menu1'>
-    <button onclick="menuButton('menu2')">Menu 2</button> 
-    <button onclick="menuButton('menu3')">Menu 3</button> 
-    <button onclick="menuButton('menu4')">Menu 4</button>  
+
+<div id='MainMenu'>
+    <button onclick="menuButton('Login')">Login</button>
+    <button onclick="menuButton('Create Account')">Create Account</button>
+    <button onclick="menuButton('Offline')">Offline</button>
 </div>
-<div id='menu2'>
-    <button onclick="menuButton('menu1')">Menu 1</button>
+
+<div id='Login'>
+    <button onclick="menuButton('MainMenu')">Back</button>
+    Username: <br>
+    <input type="text" name="ExUsername" required><br>
+    Password: <br>
+    <input type="text" name="ExPassword" required><br>
+    <input type="submit" value="Submit" onclick=menuButton('Play')>
+    <input type="submit" value="Reset Password">
+
+</div>
+
+<div id='Create Account'>
+    <button onclick="menuButton('MainMenu')">Back</button>
+    Username: <br>
+    <input type="text" name="Username" required><br>
+    Password: <br>
+    <input type="text" name="Password" required><br>
+    <input type="submit" value="Submit" >
+</div>
+
+<div id='Offline'>
+    <button onclick="menuButton('MainMenu')">Back</button>
+</div>
+
+<div id='Play'>
     <canvas id="gameCanvas" width="300" height="300" style="border:1px solid #000000;"> </canvas>
 </div>
-<div id='menu3'>
-    <button onclick="menuButton('menu1')">Menu 1</button>
-</div>
-<div id='menu4'>
-    <button onclick="menuButton('menu1')">Menu 1</button>
-</div>
-</body>
 
+</body>
